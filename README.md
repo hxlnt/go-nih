@@ -8,35 +8,34 @@ Go client for NIH Reporter API
 package main
 
 import (
-
 	reporter "github.com/hxlnt/go-nih"
-
 )
 
 func main() {
 
 	// Define the search criteria
-	criteria := reporter.ProjectSearchCriteria{
+	criteria := nih.ProjectSearchCriteria{
 		Use_relevance:           false,
 		Include_active_projects: true,
-		Activity_codes: []string{"R43", "R44"},
-		Fiscal_years:   []int{2025, 2026},
+		Fiscal_years:            []int{2025, 2026},
 	}
 
 	// Build query
-	myQuery := reporter.NewProjectQuery().
+	myQuery := nih.NewProjectQuery().
 		Criteria(criteria).
-		IncludeFields("ProjectTitle", "AwardAmount", "ProjectStartDate", "ProjectEndDate", "Organization", "AgencyIcAdmin").
-		SortDescendingBy("award_amount").
-		MaxResultsToReturn(10)
+		IncludeFields(
+			nih.ProjectTitle,
+			nih.AwardAmount,
+			nih.ProjectStartDate,
+			nih.ProjectEndDate).
+		SortDescendingBy(nih.AwardAmount).
+		MaxResultsToReturn(15)
 
 	// Run the search
 	res, err := myQuery.Search()
 
-	// Handle errors
 	if err != nil {
-		fmt.Println("Error:", err)
-		return
+	    // Handle errors
 	}
 
 	for i, result := range res.Results {

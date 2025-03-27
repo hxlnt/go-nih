@@ -21,16 +21,16 @@ type Properties struct {
 }
 
 type SearchResult struct {
-	Appl_id            int          `json:"appl_id"`
-	Subproject_id      string       `json:"subproject_id"`
-	Fiscal_year        int          `json:"fiscal_year"`
-	Project_num        string       `json:"project_num"`
-	Project_serial_num string       `json:"project_serial_num"`
-	Organization       Organization `json:"organization"`
-	Award_type         string       `json:"award_type"`
-	Activity_code      string       `json:"activity_code"`
-	Award_amount       int          `json:"award_amount"`
-	Is_active          bool         `json:"is_active"`
+	Appl_id            int               `json:"appl_id"`
+	Subproject_id      string            `json:"subproject_id"`
+	Fiscal_year        int               `json:"fiscal_year"`
+	Project_num        string            `json:"project_num"`
+	Project_serial_num string            `json:"project_serial_num"`
+	Organization       ProjROrganization `json:"organization"`
+	Award_type         string            `json:"award_type"`
+	Activity_code      string            `json:"activity_code"`
+	Award_amount       int               `json:"award_amount"`
+	Is_active          bool              `json:"is_active"`
 	Project_num_split  struct {
 		Appl_type_code string `json:"appl_type_code"`
 		Activity_code  string `json:"activity_code"`
@@ -106,7 +106,7 @@ type SearchResult struct {
 	Date_added               string `json:"date_added"`
 }
 
-type Organization struct {
+type ProjROrganization struct {
 	Org_name          string   `json:"org_name"`
 	City              string   `json:"city"`
 	Country           string   `json:"country"`

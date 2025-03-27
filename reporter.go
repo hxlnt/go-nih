@@ -14,7 +14,7 @@ const (
 
 func CheckResponseDecoding(r *http.Response, model interface{}) {
 	if err := json.NewDecoder(r.Body).Decode(&model); err != nil {
-		fmt.Println("Response Body:", r.Status)
+		fmt.Println("Error! Response Body:", r.Body)
 		if r.StatusCode == http.StatusInternalServerError {
 			fmt.Println("Check that your search criteria are valid.")
 		}
