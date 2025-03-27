@@ -3,7 +3,6 @@ package reporter
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -39,12 +38,12 @@ func (pq *ProjectQuery) SortDescendingBy(field string) *ProjectQuery {
 }
 
 // Default is 50 if not specified. Maximum allowed value is 500.
-func (pq *ProjectQuery) MaxResultsPerPage(limit int) *ProjectQuery {
+func (pq *ProjectQuery) MaxResultsToReturn(limit int) *ProjectQuery {
 	pq.PQ_Limit = limit
 	return pq
 }
 
-// Minimum and default values are 0. Maximum value is 14,999 or value specified in Limit() or 50 if Limit() is not specified.
+// Minimum and default values are 0.
 func (pq *ProjectQuery) Offset(page int) *ProjectQuery {
 	pq.PQ_Offset = page
 	return pq
@@ -55,8 +54,7 @@ func (pq *ProjectQuery) Search() (*ProjectQueryResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("JSON Entry:", string(jsonReq))
-	request, _ := http.NewRequest(http.MethodPost, "https://api.reporter.nih.gov/v2/projects/search", bytes.NewBuffer(jsonReq))
+	request, _ := http.NewRequest(http.MethodPost, projectURL, bytes.NewBuffer(jsonReq))
 	request.Header.Set("Content-Type", "application/json")
 	client := &http.Client{}
 	result, err := client.Do(request)
