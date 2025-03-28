@@ -20,6 +20,7 @@ func Test_ValidQuery(t *testing.T) {
 			Organization,
 			AgencyIcAdmin).
 		SortDescendingBy(ProjectStartDate).
+		Offset(0).
 		MaxResultsToReturn(5)
 
 	// Run the search
@@ -41,11 +42,7 @@ func Test_InvalidQuery(t *testing.T) {
 	defer func() {
 		if r := recover(); r != nil {
 			t.Logf("Panic: %v", r)
-			// if r != "500 Internal Server Error" {
-			// t.Fatalf("Expected '500 Internal Server Error' but got '%v'", r)
-			// } else {
 			return
-			// }
 		} else {
 			t.Fatalf("Should panic but did not.")
 		}
@@ -58,7 +55,8 @@ func Test_InvalidQuery(t *testing.T) {
 	// Build query
 	myQuery := NewProjectQuery().
 		Criteria(criteria).
-		// Too many results--API will return an error.
+		SortAscendingBy(ProjectTitle).
+		// Too many results (max allowed is 500)--API will return a 400 error.
 		MaxResultsToReturn(6000)
 
 	// Run the search
@@ -92,6 +90,8 @@ func Test_InvalidQuery2(t *testing.T) {
 	// Build query
 	myQuery := NewProjectQuery().
 		Criteria(criteria).
+		ExcludeFields(ProgramOfficers).
+		// Offset cannot be less than 0--API will return a generic 500 error.
 		Offset(-1).
 		MaxResultsToReturn(1)
 

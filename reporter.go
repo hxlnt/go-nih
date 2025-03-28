@@ -77,19 +77,9 @@ func (pq *ProjectQuery) Search() (*ProjectQueryResponse, error) {
 	return &responseObject, nil
 }
 
-func (pq *ProjectQuery) GetNextPage() (*ProjectQueryResponse, error) {
-	// TODO: Implement this
-	return pq.Search()
-}
-
-func (pq *ProjectQuery) GetPreviousPage() (*ProjectQueryResponse, error) {
-	//TODO: Implement this
-	return pq.Search()
-}
-
 func CheckResponseDecoding(r *http.Response, model interface{}) {
 	if err := json.NewDecoder(r.Body).Decode(&model); err != nil {
-		fmt.Println("Error! Response Body:", r.Body)
+		fmt.Println("Error! Response Body:", r.Status)
 		if r.StatusCode == http.StatusInternalServerError {
 			fmt.Println("Check that your search criteria are valid.")
 		}

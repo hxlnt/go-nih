@@ -13,6 +13,7 @@ func main() {
 	// Define the search criteria
 	criteria := nih.ProjectSearchCriteria{
 		UseRelevance:          false,
+		PiNames:               []string{"John Doe"},
 		IncludeActiveProjects: true,
 		ActivityCodes:         []nih.Activity{nih.S07, nih.UT2},
 		FiscalYears:           []int{2025, 2026},

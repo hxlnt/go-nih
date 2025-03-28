@@ -22,7 +22,7 @@ See the [example](example) folder for a complete working example.
 	// Define the search criteria
 	criteria := nih.ProjectSearchCriteria{
 		IncludeActiveProjects: true,
-		FiscalYears:            []int{2025, 2026},
+		FiscalYears:           []int{2025, 2026},
 	}
 
 	// Build query
@@ -39,10 +39,10 @@ See the [example](example) folder for a complete working example.
 	// Run the search
 	res, err := myQuery.Search()
 	if err != nil {
-	    // Handle errors
+        // Handle errors
 	}
 	for i, result := range res.Results {
-		// Do something with the results
+        // Do something with the results
 	}
 ```
 
