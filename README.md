@@ -30,9 +30,7 @@ See the [example](example) folder for a complete working example.
 		Criteria(criteria).
 		IncludeFields(
 			nih.ProjectTitle,
-			nih.AwardAmount,
-			nih.ProjectStartDate,
-			nih.ProjectEndDate).
+			nih.AwardAmount).
 		SortDescendingBy(nih.AwardAmount).
 		MaxResultsToReturn(15)
 
@@ -47,7 +45,7 @@ See the [example](example) folder for a complete working example.
 ```
 
 ## To-do 
- - Completion of in-editor documentation
- - Implementation of publication search
- - Consider whether to offer more granular control over `http.Client` or leave as is
- - First major release
+ - Complete in-editor documentation
+ - Implement publication search
+ - Consider whether to offer more granular control over the `http.Client` or leave as is
+ - Publish first major release
