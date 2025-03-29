@@ -12,15 +12,18 @@ const (
 	publicationURL = "https://api.reporter.nih.gov/v2/publications/search"
 )
 
+// An object containing search criteria and other parameters which sent to the RePORTER API in a POST request in order to search for projects.
 func NewProjectQuery() *ProjectQuery {
 	return &ProjectQuery{}
 }
 
+// Adds search parameters (as a criteria object) to a project query.
 func (pq *ProjectQuery) Criteria(criteria ProjectSearchCriteria) *ProjectQuery {
 	pq.PQ_Criteria = criteria
 	return pq
 }
 
+// Fields to explicitly include in the returned results.
 func (pq *ProjectQuery) IncludeFields(fields ...ProjFieldName) *ProjectQuery {
 	for _, field := range fields {
 		pq.PQ_IncludeFields = append(pq.PQ_IncludeFields, ProjQFieldName[field])
@@ -28,6 +31,7 @@ func (pq *ProjectQuery) IncludeFields(fields ...ProjFieldName) *ProjectQuery {
 	return pq
 }
 
+// Fields for which data should not be returned in the results.
 func (pq *ProjectQuery) ExcludeFields(fields ...ProjFieldName) *ProjectQuery {
 	for _, field := range fields {
 		pq.PQ_ExcludeFields = append(pq.PQ_ExcludeFields, ProjQFieldName[field])
@@ -35,19 +39,21 @@ func (pq *ProjectQuery) ExcludeFields(fields ...ProjFieldName) *ProjectQuery {
 	return pq
 }
 
+// Field name to sort results, low to high.
 func (pq *ProjectQuery) SortAscendingBy(field ProjFieldName) *ProjectQuery {
 	pq.PQ_SortField = ProjRFieldName[field]
 	pq.PQ_SortOrder = "asc"
 	return pq
 }
 
+// Field name to sort results, high to low.
 func (pq *ProjectQuery) SortDescendingBy(field ProjFieldName) *ProjectQuery {
 	pq.PQ_SortField = ProjRFieldName[field]
 	pq.PQ_SortOrder = "desc"
 	return pq
 }
 
-// Default is 50 if not specified. Maximum allowed value is 500.
+// Default is 50 if not specified. Maximum allowed value is 500; values greater than 500 will cause the API to return an error.
 func (pq *ProjectQuery) MaxResultsToReturn(limit int) *ProjectQuery {
 	pq.PQ_Limit = limit
 	return pq
@@ -59,6 +65,7 @@ func (pq *ProjectQuery) Offset(page int) *ProjectQuery {
 	return pq
 }
 
+// Completes a search on a given query, returning the results and error objects.
 func (pq *ProjectQuery) Search() (*ProjectQueryResponse, error) {
 	jsonReq, err := json.Marshal(pq)
 	if err != nil {
@@ -73,11 +80,11 @@ func (pq *ProjectQuery) Search() (*ProjectQueryResponse, error) {
 	}
 	defer result.Body.Close()
 	var responseObject ProjectQueryResponse
-	CheckResponseDecoding(result, &responseObject)
+	checkResponseDecoding(result, &responseObject)
 	return &responseObject, nil
 }
 
-func CheckResponseDecoding(r *http.Response, model interface{}) {
+func checkResponseDecoding(r *http.Response, model interface{}) {
 	if err := json.NewDecoder(r.Body).Decode(&model); err != nil {
 		fmt.Println("Error! Response Body:", r.Status)
 		if r.StatusCode == http.StatusInternalServerError {

@@ -1,7 +1,7 @@
 # go-nih
 ![](https://img.shields.io/badge/Pre--release-0.0.1-red) ![Test coverage](https://img.shields.io/badge/Test%20coverage-95%25-green)
 
-A Go library for easier interactions with the [NIH RePORTER API](https://api.reporter.nih.gov). This is a working pre-release version; use at your own risk.
+A Go library for easier interactions with the [NIH RePORTER API](https://api.reporter.nih.gov). This is a probably-working pre-release version; use at your own risk.
 
 ## Features
 Don't have [all 200+ NIH activity codes](https://grants.nih.gov/funding/activity-codes) memorized? Not sure what a parameter means or what data type it should return? Can't remember how to pass field names? Then you might enjoy some of these features.
@@ -16,7 +16,7 @@ Don't have [all 200+ NIH activity codes](https://grants.nih.gov/funding/activity
 Currently, only project search is implemented. Publication search may be implemented at a future time.
 
 ## Usage
-See the [example](example) folder for a complete working example.
+See the [example](example) folder in this repo for more complete sample code.
 
 ```go
 // Define the search criteria
