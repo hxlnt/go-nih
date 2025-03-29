@@ -21,18 +21,18 @@ See the [example](example) folder in this repo for more complete sample code.
 ```go
 // Define the search criteria
 criteria := nih.ProjectSearchCriteria{
-	IncludeActiveProjects: true,
-	FiscalYears:           []int{2025, 2026},
+    IncludeActiveProjects: true,
+    FiscalYears:           []int{2025, 2026},
 }
 
 // Build query
 myQuery := nih.NewProjectQuery().
-	Criteria(criteria).
-	IncludeFields(
-		nih.ProjectTitle,
-		nih.AwardAmount).
-	SortDescendingBy(nih.AwardAmount).
-	MaxResultsToReturn(15)
+    Criteria(criteria).
+    IncludeFields(
+	    nih.ProjectTitle,
+	    nih.AwardAmount).
+    SortDescendingBy(nih.AwardAmount).
+    MaxResultsToReturn(15)
 
 // Run the search
 res, err := myQuery.Search()
