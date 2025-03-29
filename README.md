@@ -4,7 +4,7 @@
 A Go library for easier interactions with the [NIH RePORTER API](https://api.reporter.nih.gov). This is a working pre-release version; use at your own risk.
 
 ## Features
-Don't have [all 200+ NIH activity codes](https://grants.nih.gov/funding/activity-codes) memorized? Not sure what a parameter means or what data type it should return? Can't remember when field names should be passed in snake case or Pascal case? Then you might enjoy some of these features.
+Don't have [all 200+ NIH activity codes](https://grants.nih.gov/funding/activity-codes) memorized? Not sure what a parameter means or what data type it should return? Can't remember how to pass field names? Then you might enjoy some of these features.
 
 - In-editor type checking and validation for complex query parameters
   <img width="800" alt="Screenshot 2025-03-28 at 4 55 44 PM" src="https://github.com/user-attachments/assets/0682270a-52ad-4bb9-aaa0-d97917e2759a" />
