@@ -19,29 +19,29 @@ Currently, only project search is implemented. Publication search may be impleme
 See the [example](example) folder for a complete working example.
 
 ```go
-	// Define the search criteria
-	criteria := nih.ProjectSearchCriteria{
-		IncludeActiveProjects: true,
-		FiscalYears:           []int{2025, 2026},
-	}
+// Define the search criteria
+criteria := nih.ProjectSearchCriteria{
+	IncludeActiveProjects: true,
+	FiscalYears:           []int{2025, 2026},
+}
 
-	// Build query
-	myQuery := nih.NewProjectQuery().
-		Criteria(criteria).
-		IncludeFields(
-			nih.ProjectTitle,
-			nih.AwardAmount).
-		SortDescendingBy(nih.AwardAmount).
-		MaxResultsToReturn(15)
+// Build query
+myQuery := nih.NewProjectQuery().
+	Criteria(criteria).
+	IncludeFields(
+		nih.ProjectTitle,
+		nih.AwardAmount).
+	SortDescendingBy(nih.AwardAmount).
+	MaxResultsToReturn(15)
 
-	// Run the search
-	res, err := myQuery.Search()
-	if err != nil {
-        // Handle errors
-	}
-	for i, result := range res.Results {
-        // Do something with the results
-	}
+// Run the search
+res, err := myQuery.Search()
+if err != nil {
+    // Handle errors
+}
+for i, result := range res.Results {
+    // Do something with the results
+}
 ```
 
 ## To-do 
